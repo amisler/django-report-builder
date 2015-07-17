@@ -140,11 +140,11 @@ class DownloadFileView(DataExportMixin, View):
         else:
             xlsx_file = self.list_to_xlsx_file(objects_list, title,
                                                header, widths)
-            title = generate_filename(title, '.xlsx')
+            #title = generate_filename(title, '.xlsx')
             from io import BytesIO
             #wb = load_workbook(filename=BytesIO(input_excel.read()))
             f = open(xlsx_file)
-            report.report_file.save(File(f))
+            report.report_file.save(f.name, File(f))
         report.report_file_creation = datetime.datetime.today()
         report.save()
         if getattr(settings, 'REPORT_BUILDER_EMAIL_NOTIFICATION', False):
