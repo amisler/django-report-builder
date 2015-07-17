@@ -2,6 +2,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.conf import settings
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.core.files.base import ContentFile
+from django.core.files import File
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import get_user_model
 from django.template.loader import get_template
@@ -140,7 +141,10 @@ class DownloadFileView(DataExportMixin, View):
             xlsx_file = self.list_to_xlsx_file(objects_list, title,
                                                header, widths)
             title = generate_filename(title, '.xlsx')
-            report.report_file.save(title, ContentFile(xlsx_file.getvalue()))
+            from io import BytesIO
+            #wb = load_workbook(filename=BytesIO(input_excel.read()))
+            f = open(xlsx_file)
+            report.report_file.save(File(f))
         report.report_file_creation = datetime.datetime.today()
         report.save()
         if getattr(settings, 'REPORT_BUILDER_EMAIL_NOTIFICATION', False):
