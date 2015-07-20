@@ -97,6 +97,7 @@
 			<ul class="no-js">
 				<li>
 					<a id='userprofile' class="clicker"><img src="{{ static('report_builder/img/i-1.png') }}" alt="Icon"></a>
+                    <script>$('#userprofile').text(CURRENT_USER_NAME);</script>
 					<ul>
 						<li><a href="/report_builder"><img src="{{ static('report_builder/img/i-2.png') }}" alt="Icon">Dashboard</a></li>
 						<li><a href="/accounts/logout"><img src="{{ static('report_builder/img/i-6.png') }}" alt="Icon">Sign out</a></li>
@@ -201,10 +202,9 @@
 
 		})
 
-        $(window).bind("load", function() {
+
         console.log('here2');
             console.log(CURRENT_USER_NAME);
          $('#userprofile').text(CURRENT_USER_NAME);
 
-        });
 </script>
