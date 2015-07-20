@@ -1,22 +1,4 @@
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script>
-		$(function() {
-			// Clickable Dropdown
-			$('.click-nav > ul').toggleClass('no-js js');
-			$('.click-nav .js ul').hide();
-			$('.click-nav .js').click(function(e) {
-				$('.click-nav .js ul').slideToggle(200);
-				$('.clicker').toggleClass('active');
-				e.stopPropagation();
-			});
-			$(document).click(function() {
-				if ($('.click-nav .js ul').is(':visible')) {
-					$('.click-nav .js ul', this).slideUp();
-					$('.clicker').removeClass('active');
-				}
-			});
-		})
-</script>
+
 <div class="fullheight" id="reportapp" layout="column" layout-fill="">
   <section class="fullheight" layout="row">
     <md-sidenav class="fullheight md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-lg')">
@@ -110,21 +92,28 @@
           <span flex=""></span>
           <span>Last Updated: {{ report.modified }}</span>
         </h1>
-          		<!-- Clickable Nav -->
+
+        <h1 class="md-toolbar-tools">
+        <md-input-container>
+            		<!-- Clickable Nav -->
 		<div class="click-nav">
 			<ul class="no-js">
 				<li>
 					<a class="clicker"><img src="img/i-1.png" alt="Icon">{{ user.username }}</a>
 					<ul>
-						<li><a href="/report_builder"><img src="img/i-2.png" alt="Icon">Dashboard</a></li>
-						<li><a href="/accounts/logout"><img src="img/i-6.png" alt="Icon">Sign out</a></li>
+						<li><a href="/report_builder"><img src="{{ STATIC_URL }}img/i-2.png" alt="Icon">Dashboard</a></li>
+						<li><a href="/accounts/logout"><img src="{{ STATIC_URL }}img/i-6.png" alt="Icon">Sign out</a></li>
 					</ul>
 				</li>
 			</ul>
 		</div>
+            </md-input-container>
+
+        </h1>
 		<!-- /Clickable Nav -->
 
 		<!-- jQuery -->
+
 
       </md-toolbar>
       <md-content class="report-tabs-height">
@@ -191,3 +180,23 @@
     </md-sidenav>
   </section>
 </div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script>
+		$(function() {
+			// Clickable Dropdown
+			$('.click-nav > ul').toggleClass('no-js js');
+			$('.click-nav .js ul').hide();
+			$('.click-nav .js').click(function(e) {
+				$('.click-nav .js ul').slideToggle(200);
+				$('.clicker').toggleClass('active');
+				e.stopPropagation();
+			});
+			$(document).click(function() {
+				if ($('.click-nav .js ul').is(':visible')) {
+					$('.click-nav .js ul', this).slideUp();
+					$('.clicker').removeClass('active');
+				}
+			});
+		})
+</script>
