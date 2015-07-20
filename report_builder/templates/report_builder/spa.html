@@ -22,6 +22,11 @@
     <script>
       var CURRENT_USER = '{{ user.id }}';
     var CURRENT_USER_NAME = '{{ user.username }}';
+    $(document).ready(function() {
+
+         $('#userprofile').text(CURRENT_USER_NAME);
+
+    });
     </script>
     {% endif %}
 
