@@ -32,6 +32,7 @@ class ReportSPAView(TemplateView):
         context['ASYNC_REPORT'] = getattr(
             settings, 'REPORT_BUILDER_ASYNC_REPORT', False
         )
+        context['user'] = self.request.user
         return context
 
 
