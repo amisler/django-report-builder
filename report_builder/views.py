@@ -28,6 +28,8 @@ class ReportSPAView(TemplateView):
     template_name = "report_builder/spa.html"
 
     def get_context_data(self, **kwargs):
+        print self.request
+        print self.request.user
         context = super(ReportSPAView, self).get_context_data(**kwargs)
         context['ASYNC_REPORT'] = getattr(
             settings, 'REPORT_BUILDER_ASYNC_REPORT', False
