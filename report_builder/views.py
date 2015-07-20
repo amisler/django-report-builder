@@ -63,8 +63,11 @@ def get_fieldsets(model):
 
 def email_report(report_url, user):
     print report_url
+    from django.contrib.sites.models import Site
 
-    link = 'http://' + get_current_site() + report_url
+    current_site = Site.objects.get_current()
+    site = current_site.domain
+    link = 'http://' + site + report_url
     if ((getattr(settings, 'EMAIL_BACKEND', False) or
             getattr(settings, 'EMAIL_HOST', False)) and
             getattr(settings, 'DEFAULT_FROM_EMAIL', False)):
