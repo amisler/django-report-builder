@@ -17,6 +17,7 @@ from six import string_types
 from .utils import duplicate
 from .models import Report
 from report_utils.mixins import DataExportMixin, generate_filename
+from django.contrib.sites.models import Site
 
 import datetime
 import re
@@ -76,6 +77,8 @@ def email_report(report_url, user):
             htmlParameters = {
                 'name': user.first_name or user.username,
                 'report': report_url,
+                'domain': Site.objects.get_current().domain
+
             }
             msg.attach_alternative(
                 email_template.render(Context(htmlParameters)),
