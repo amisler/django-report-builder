@@ -254,7 +254,7 @@ def check_status(request, pk, task_id):
     link = ''
     if res.state == 'SUCCESS':
         report = get_object_or_404(Report, pk=pk)
-        link = report.report_file.url
+        link = 'http://' get_current_site() + report.report_file.url
     return HttpResponse(
         json.dumps({
             'state': res.state,
