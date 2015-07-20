@@ -181,10 +181,8 @@
 
 
 		<script>
-        $( document ).ready(function() {
-            $('#userprofile').text(CURRENT_USER_NAME);
-        });
-        
+
+
 		$(function() {
 			// Clickable Dropdown
 			$('.click-nav > ul').toggleClass('no-js js');
@@ -200,5 +198,6 @@
 					$('.clicker').removeClass('active');
 				}
 			});
+            $('#userprofile').text(CURRENT_USER_NAME);
 		})
 </script>
