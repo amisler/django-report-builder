@@ -1,3 +1,22 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script>
+		$(function() {
+			// Clickable Dropdown
+			$('.click-nav > ul').toggleClass('no-js js');
+			$('.click-nav .js ul').hide();
+			$('.click-nav .js').click(function(e) {
+				$('.click-nav .js ul').slideToggle(200);
+				$('.clicker').toggleClass('active');
+				e.stopPropagation();
+			});
+			$(document).click(function() {
+				if ($('.click-nav .js ul').is(':visible')) {
+					$('.click-nav .js ul', this).slideUp();
+					$('.clicker').removeClass('active');
+				}
+			});
+		})
+</script>
 <div class="fullheight" id="reportapp" layout="column" layout-fill="">
   <section class="fullheight" layout="row">
     <md-sidenav class="fullheight md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-lg')">
@@ -106,8 +125,7 @@
 		<!-- /Clickable Nav -->
 
 		<!-- jQuery -->
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script>
+
       </md-toolbar>
       <md-content class="report-tabs-height">
         <md-tabs class="report-tabs-height" md-selected="selectedIndex">
