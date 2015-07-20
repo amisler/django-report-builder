@@ -17,7 +17,7 @@ from six import string_types
 from .utils import duplicate
 from .models import Report
 from report_utils.mixins import DataExportMixin, generate_filename
-from django.contrib.sites.models import Site
+from django.contrib.sites.models import get_current_site
 
 import datetime
 import re
@@ -62,12 +62,13 @@ def get_fieldsets(model):
 
 
 def email_report(report_url, user):
+    print report_url
+
+    link = 'http://' + get_current_site() + report_url
     if ((getattr(settings, 'EMAIL_BACKEND', False) or
             getattr(settings, 'EMAIL_HOST', False)) and
             getattr(settings, 'DEFAULT_FROM_EMAIL', False)):
         if get_template('email/email_report.html'):
-            site = Site.objects.get_current()
-            link = 'http://' + site.domain + '/' +report_url
             email_template = get_template('email/email_report.html')
             msg = EmailMultiAlternatives(
                 getattr(settings, 'REPORT_BUILDER_EMAIL_SUBJECT', False) or
@@ -78,9 +79,7 @@ def email_report(report_url, user):
             )
             htmlParameters = {
                 'name': user.first_name or user.username,
-                'report': report_url,
-                'domain': Site.objects.get_current().domain
-
+                'report': link,
             }
             msg.attach_alternative(
                 email_template.render(Context(htmlParameters)),
@@ -91,7 +90,7 @@ def email_report(report_url, user):
             send_mail(
                 getattr(settings, 'REPORT_BUILDER_EMAIL_SUBJECT', False) or
                 'Report is ready',
-                str(report_url),
+                str(link),
                 getattr(settings, 'DEFAULT_FROM_EMAIL'),
                 [user.email],
                 fail_silently=True,
