@@ -66,11 +66,13 @@ def email_report(report_url, user):
             getattr(settings, 'EMAIL_HOST', False)) and
             getattr(settings, 'DEFAULT_FROM_EMAIL', False)):
         if get_template('email/email_report.html'):
+            site = Site.objects.get_current()
+            link = 'http://' + site.domain + '/' +report_url
             email_template = get_template('email/email_report.html')
             msg = EmailMultiAlternatives(
                 getattr(settings, 'REPORT_BUILDER_EMAIL_SUBJECT', False) or
                 'Report is ready',
-                report_url,
+                link,
                 getattr(settings, 'DEFAULT_FROM_EMAIL'),
                 [user.email],
             )
