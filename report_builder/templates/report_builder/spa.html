@@ -23,8 +23,6 @@
       var CURRENT_USER = '{{ user.id }}';
     var CURRENT_USER_NAME = '{{ user.username }}';
     function setUser() {
-        console.log('here');
-        console.log(CURRENT_USER_NAME);
         $('#userprofile').text(CURRENT_USER_NAME);
     }
     setTimeout(setUser, 2000);
